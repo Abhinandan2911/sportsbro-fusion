@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Clear LocalStorage</title>
+    <script>
+        // Clear all localStorage items
+        localStorage.clear();
+        
+        // Display success message
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('status').textContent = 'LocalStorage cleared successfully!';
+        });
+    </script>
+</head>
+<body>
+    <h1>LocalStorage Cleaner</h1>
+    <p id="status">Working...</p>
+    <p>This page clears all items from your browser's localStorage for this domain.</p>
+    <p>After clearing, please try logging in again with the admin token: <strong>admin123</strong></p>
+    <p><a href="/">Return to the application</a></p>
+</body>
+</html> 

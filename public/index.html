@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="SportsBro - Connect with athletes, track progress, and find teams"
+    />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <title>SportsBro</title>
+    
+    <!-- CRITICAL FIX - Prevent profile popup from showing for existing users -->
+    <script>
+      (function() {
+        try {
+          // Force existing users to never see the popup
+          const storedUser = localStorage.getItem('user');
+          if (storedUser) {
+            const userData = JSON.parse(storedUser);
+            userData.isFirstLogin = false;
+            localStorage.setItem('user', JSON.stringify(userData));
+            localStorage.setItem('profileCompletionDismissed', 'true');
+            console.log("✅ User data cleaned: profile popup disabled");
+          }
+        } catch (e) {
+          console.error("Error cleaning user data:", e);
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html> 

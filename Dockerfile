@@ -1,20 +1,21 @@
-# Build stage
-FROM node:18-alpine as build
+FROM node:18-alpine
 
 WORKDIR /app
 
+# Install dependencies
 COPY package*.json ./
 RUN npm install
+RUN npm install --save express-session
+RUN npm install --save-dev @types/express-session
 
+# Copy source code
 COPY . .
+
+# Build TypeScript code
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
+# Expose port
+EXPOSE 5003
 
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-EXPOSE 80
-
-CMD ["nginx", "-g", "daemon off;"] 
+# Start the application
+CMD ["node", "dist/index.js"]
